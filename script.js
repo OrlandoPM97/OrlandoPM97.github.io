@@ -10,6 +10,7 @@ const cartas = [
 let players = [];
 let mazo = [...cartas]; // Mazo de cartas que se va a sortear
 let juegoActivo = true; // Variable para controlar si el juego está activo
+let ganador = null; // Variable para almacenar al jugador ganador
 
 // Actualizar la cantidad de jugadores visibles en la interfaz
 function updatePlayerNames() {
@@ -130,7 +131,9 @@ function drawCard() {
     });
 
     // Verificar si algún jugador ganó
-    players.forEach(player => checkWinner(player.id));
+    if (!ganador) {
+        players.forEach(player => checkWinner(player.id));
+    }
 }
 
 // Marcar la carta en el tablero del jugador si la tiene
@@ -148,11 +151,12 @@ function markCardIfPlayerHasCard(playerId, carta) {
 
 // Verificar si un jugador ganó
 function checkWinner(playerId) {
-    if (!juegoActivo) return; // Si el juego no está activo, no hacer nada
+    if (!juegoActivo || ganador) return; // Si el juego no está activo o ya hay un ganador, no hacer nada
 
     const player = players.find(p => p.id === playerId);
     if (player.cards.length === 0) {
         juegoActivo = false; // Desactivar el juego
+        ganador = playerId; // Asignar al jugador como ganador
         document.getElementById("status").innerText = `${playerId === "player1" ? "Jugador 1" : playerId === "player2" ? "Jugador 2" : "Jugador 3"} ¡Ganó!`;
         document.getElementById("drawCardBtn").disabled = true;
 
@@ -192,6 +196,7 @@ function resetGame() {
 
     // Reactivar el juego
     juegoActivo = true;
+    ganador = null; // Reiniciar la variable del ganador
 }
 
 // Función para bloquear la interacción con el tablero de los jugadores

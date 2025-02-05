@@ -9,54 +9,57 @@ body {
     font-family: 'Arial', sans-serif;
     text-align: center;
     background-color: #f5f5f5;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden; /* Evita el desbordamiento horizontal */
+    overflow-x: hidden;
     margin: 0;
 }
 
-/* Eliminar el recuadro del juego y hacer que ocupe toda la pantalla */
+/* Contenedor del juego */
 .game-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 100%; /* Ocupa toda la altura de la pantalla */
-    background-color: #fff;
+    max-width: 1200px; /* Limitar el ancho máximo para pantallas grandes */
     padding: 20px;
+    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 0; /* Elimina el borde redondeado */
-    flex-direction: column;
-    overflow-y: auto; /* Permite que haya scroll solo si es necesario */
+    border-radius: 10px;
+    overflow-y: auto;
 }
 
 /* Estilos para el título */
 h1 {
     color: #2c3e50;
     margin-bottom: 15px;
-    font-size: 2.5em; /* Tamaño más grande para visibilidad */
+    font-size: 2em; /* Tamaño más pequeño para móviles */
 }
 
 h2 {
     color: #e74c3c;
+    font-size: 1.5em;
 }
 
 /* Estilo de los contenedores de jugadores */
 #players-container {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 40px; /* Más espacio entre los jugadores */
     flex-wrap: wrap; /* Para que los jugadores se acomoden en pantallas pequeñas */
+    margin-top: 20px; /* Espacio adicional arriba */
 }
 
 #player1, #player2, #player3, #player4 {
-    width: 45%;
+    width: 100%;
+    max-width: 450px; /* Aumenté el ancho máximo para que quepan las cartas */
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 200px; /* Evita que las cartas se vuelvan demasiado pequeñas */
+    margin-bottom: 30px; /* Más espacio entre los jugadores */
+    padding: 15px; /* Espacio interno para evitar que el contenido se pegue a los bordes */
+    background-color: #f9f9f9; /* Fondo claro para distinguir los tableros */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 /* Estilo para las cartas y los jugadores */
@@ -67,22 +70,18 @@ h2 {
     gap: 10px;
     margin-top: 20px;
     width: 100%;
-    max-width: 400px; /* Limita el tamaño de las cartas */
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Estilo para las cartas */
 .carta {
-    width: 100%;
-    height: 100px;
+    width: 100px; /* Ancho fijo de 100px */
+    height: 150px; /* Altura fija de 150px */
     background-color: #ecf0f1;
-    margin: 0;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2em;
+    font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -100,10 +99,12 @@ button {
     background-color: #2ecc71;
     border: none;
     color: white;
-    font-size: 1.1em;
+    font-size: 1em;
     margin-top: 20px;
     cursor: pointer;
     border-radius: 5px;
+    width: 100%;
+    max-width: 200px; /* Limitar el ancho de los botones */
 }
 
 button:disabled {
@@ -116,7 +117,7 @@ button:disabled {
 }
 
 #carta-sorteada {
-    font-size: 2em;
+    font-size: 1.5em;
     color: #e74c3c;
 }
 
@@ -128,4 +129,26 @@ button:disabled {
 /* Estilos para el selector de jugadores */
 #players-selection {
     margin-bottom: 20px;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em; /* Tamaño más pequeño para móviles */
+    }
+
+    .carta {
+        width: 80px; /* Ancho más pequeño para móviles */
+        height: 120px; /* Altura más pequeña para móviles */
+        font-size: 0.9em;
+    }
+
+    #players-container {
+        gap: 20px; /* Menos espacio entre jugadores en móviles */
+    }
+
+    #player1, #player2, #player3, #player4 {
+        max-width: 100%; /* Ocupar todo el ancho en móviles */
+        margin-bottom: 20px; /* Menos espacio entre jugadores en móviles */
+    }
 }

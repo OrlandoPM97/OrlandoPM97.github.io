@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotería Mexicana</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Lotería Mexicana Jarabes San Pedro</h1>
+
+        <!-- Selector de cantidad de jugadores sin el texto -->
+        <div id="players-selection">
+            <select id="num-players" onchange="updatePlayerNames()">
+                <option value="" selected disabled>Selecciona el número de jugadores</option> <!-- Opción en blanco -->
+                <option value="2">2 Jugadores</option>
+                <option value="3">3 Jugadores</option>
+                <option value="4">4 Jugadores</option>
+            </select>
+        </div>
+
+        <div id="players-container">
+            <!-- Los jugadores se crearán dinámicamente aquí -->
+        </div>
+
+        <div id="loteria">
+            <h3>Carta Sorteada</h3>
+            <div id="carta-sorteada"></div>
+        </div>
+
+        <div id="game-status">
+            <p id="status"></p>
+        </div>
+
+        <div id="buttons-container">
+            <button id="startBtn" onclick="startGame()" disabled>Iniciar Juego</button> <!-- Deshabilitado por defecto -->
+            <button id="drawCardBtn" onclick="drawCard()" disabled>Sorteo de Carta</button>
+            <button id="resetBtn" onclick="resetGame()" style="display:none;">Reiniciar Juego</button> <!-- Botón de reinicio oculto -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

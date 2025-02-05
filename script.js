@@ -1,9 +1,9 @@
-// Definir las 17 cartas de la lotería
+// Definir las 22 cartas de la lotería (17 originales + 5 nuevas)
 const cartas = [
     'Horchata', 'Tamarindo', 'Fresa', 'Mango', 'Guanabana',
     'Guayaba', 'Maracuya', 'Piña', 'Limon', 'Grosella',
     'Uva', 'Naranja', 'Mandarina', 'Manzana', 'Jamaica',
-    'Jarabe Natural', 'Piña Colada'
+    'Jarabe Natural', 'Piña Colada', 'Hielo', 'Vitrolero', 'Bolis', 'Frutas', 'Vaso'
 ];
 
 // Variables para los jugadores
@@ -30,7 +30,7 @@ function updatePlayerNames() {
             <div class="cartas"></div>
         `;
         playersContainer.appendChild(playerDiv);
-        players.push({ id: `player${i}`, cards: [] });
+        players.push({ id: `player${i}`, cards: [], marcadas: [] }); // Añadir array para cartas marcadas
     }
 
     // Habilitar el botón de iniciar solo si se seleccionó un número válido
@@ -77,9 +77,8 @@ function marcarCarta(playerId, cartaDiv, carta) {
 
     // Verificar si el jugador tiene esa carta
     const player = players.find(p => p.id === playerId);
-    const index = player.cards.indexOf(carta);
-    if (index !== -1) {
-        player.cards.splice(index, 1);
+    if (!player.marcadas.includes(carta)) {
+        player.marcadas.push(carta); // Añadir la carta marcada
     }
 
     // Verificar si el jugador ganó
@@ -142,10 +141,11 @@ function markCardIfPlayerHasCard(playerId, carta) {
     if (cartaDiv) {
         cartaDiv.classList.add("marcada");
 
-        // Eliminar la carta del jugador
+        // Añadir la carta marcada al jugador
         const player = players.find(p => p.id === playerId);
-        const index = player.cards.indexOf(carta);
-        if (index !== -1) player.cards.splice(index, 1);
+        if (!player.marcadas.includes(carta)) {
+            player.marcadas.push(carta);
+        }
     }
 }
 
@@ -154,7 +154,7 @@ function checkWinner(playerId) {
     if (!juegoActivo || ganador) return; // Si el juego no está activo o ya hay un ganador, no hacer nada
 
     const player = players.find(p => p.id === playerId);
-    if (player.cards.length === 0) {
+    if (player.marcadas.length === 8) { // Verificar si ha marcado todas sus cartas
         juegoActivo = false; // Desactivar el juego
         ganador = playerId; // Asignar al jugador como ganador
         document.getElementById("status").innerText = `${playerId === "player1" ? "Jugador 1" : playerId === "player2" ? "Jugador 2" : "Jugador 3"} ¡Ganó!`;
@@ -168,7 +168,10 @@ function checkWinner(playerId) {
 // Función para reiniciar el juego
 function resetGame() {
     // Limpiar las cartas de los jugadores
-    players.forEach(player => player.cards = []);
+    players.forEach(player => {
+        player.cards = [];
+        player.marcadas = [];
+    });
 
     // Limpiar el estado del juego
     document.getElementById("carta-sorteada").innerText = '';

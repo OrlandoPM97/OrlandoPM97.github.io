@@ -1,4 +1,4 @@
-// Definir las 22 cartas de la lotería (17 originales + 5 nuevas)
+// Definimos 22 cartas que son los sabores y unas cuantas resetas de Jarabes San Pedro
 const cartas = [
     'Horchata', 'Tamarindo', 'Fresa', 'Mango', 'Guanabana',
     'Guayaba', 'Maracuya', 'Piña', 'Limon', 'Grosella',
@@ -6,21 +6,20 @@ const cartas = [
     'Jarabe Natural', 'Piña Colada', 'Hielo', 'Vitrolero', 'Bolis', 'Frutas', 'Vaso'
 ];
 
-// Variables para los jugadores
+// Variables que guardaran las acciones realizadas dentro del juego
 let players = [];
-let mazo = [...cartas]; // Mazo de cartas que se va a sortear
-let juegoActivo = true; // Variable para controlar si el juego está activo
-let ganador = null; // Variable para almacenar al jugador ganador
+let mazo = [...cartas]; 
+let juegoActivo = true; 
+let ganador = null;
 
-// Actualizar la cantidad de jugadores visibles en la interfaz
+// Funcion que actualiza el numero de jugadores
 function updatePlayerNames() {
     const numPlayers = parseInt(document.getElementById("num-players").value);
     const playersContainer = document.getElementById("players-container");
 
-    // Limpiar la interfaz
     playersContainer.innerHTML = '';
 
-    // Crear los contenedores de jugadores según la cantidad seleccionada
+    // Crear los contenedores o tableros de jugadores según la cantidad seleccionada
     players = [];
     for (let i = 1; i <= numPlayers; i++) {
         const playerDiv = document.createElement("div");
@@ -33,7 +32,7 @@ function updatePlayerNames() {
         players.push({ id: `player${i}`, cards: [], marcadas: [] }); // Añadir array para cartas marcadas
     }
 
-    // Habilitar el botón de iniciar solo si se seleccionó un número válido
+    // Habilitar el botón de iniciar solo si se seleccionó un número de jugadores
     const startBtn = document.getElementById("startBtn");
     if (numPlayers) {
         startBtn.disabled = false; // Habilitar el botón si hay jugadores seleccionados
@@ -47,7 +46,7 @@ function generateCards(playerId) {
     const container = document.querySelector(`#${playerId} .cartas`);
     let cards = [...cartas]; // Copiar el arreglo de cartas
 
-    // Seleccionar 8 cartas para el jugador
+    // Seleccionar 8 cartas para el jugador se pueden agregar mas o menos cartas por tablero del jugador
     let selectedCards = [];
     for (let i = 0; i < 8; i++) {
         const randomIndex = Math.floor(Math.random() * cards.length);
@@ -63,7 +62,7 @@ function generateCards(playerId) {
         const cartaDiv = document.createElement("div");
         cartaDiv.classList.add("carta");
         cartaDiv.innerText = carta;
-        cartaDiv.setAttribute("data-carta", carta); // Añadir un atributo para identificarla
+        cartaDiv.setAttribute("data-carta", carta);
         cartaDiv.onclick = () => marcarCarta(playerId, cartaDiv, carta);
         container.appendChild(cartaDiv);
     });
@@ -71,14 +70,14 @@ function generateCards(playerId) {
 
 // Marcar una carta de un jugador
 function marcarCarta(playerId, cartaDiv, carta) {
-    if (!juegoActivo) return; // Si el juego no está activo, no hacer nada
+    if (!juegoActivo) return;
 
     cartaDiv.classList.add("marcada");
 
     // Verificar si el jugador tiene esa carta
     const player = players.find(p => p.id === playerId);
     if (!player.marcadas.includes(carta)) {
-        player.marcadas.push(carta); // Añadir la carta marcada
+        player.marcadas.push(carta);
     }
 
     // Verificar si el jugador ganó
@@ -87,16 +86,15 @@ function marcarCarta(playerId, cartaDiv, carta) {
 
 // Comenzar el juego
 function startGame() {
-    // Ocultar el selector de jugadores
+    // Ocultar el selector de jugadores despues de dar unicio
     document.getElementById("players-selection").style.display = "none";
 
-    // Generar las cartas para todos los jugadores
+    // Generar las cartas para todos los jugadores es completamemte al azar
     players.forEach(player => generateCards(player.id));
 
-    // Habilitar el botón de sorteo
     document.getElementById("drawCardBtn").disabled = false;
 
-    // Deshabilitar el botón de inicio
+    // Deshabilitar el botón de inicio cuando esta el juego en curso
     document.getElementById("startBtn").disabled = true;
 
     // Mostrar los títulos de los jugadores
@@ -104,13 +102,13 @@ function startGame() {
         document.querySelector(`#${player.id} .player-name`).style.display = "block";
     });
 
-    // Bloquear la interacción con las cartas del jugador
+    // Bloquear la interacción con las cartas del jugador para que ellos no puedan seleccionar (Hacer trampa)
     blockPlayerBoard();
 }
 
 // Sorteo de una carta
 function drawCard() {
-    if (!juegoActivo) return; // Si el juego no está activo, no hacer nada
+    if (!juegoActivo) return;
 
     if (mazo.length === 0) {
         alert("Ya no hay cartas en el mazo.");
@@ -119,7 +117,7 @@ function drawCard() {
 
     // Seleccionar una carta aleatoria del mazo
     const randomIndex = Math.floor(Math.random() * mazo.length);
-    const cartaSorteada = mazo.splice(randomIndex, 1)[0]; // Eliminar y obtener la carta
+    const cartaSorteada = mazo.splice(randomIndex, 1)[0]; // Eliminar y obtener la carta del maso de 22 cartas
 
     // Mostrar la carta sorteada
     document.getElementById("carta-sorteada").innerText = cartaSorteada;
@@ -151,7 +149,7 @@ function markCardIfPlayerHasCard(playerId, carta) {
 
 // Verificar si un jugador ganó
 function checkWinner(playerId) {
-    if (!juegoActivo || ganador) return; // Si el juego no está activo o ya hay un ganador, no hacer nada
+    if (!juegoActivo || ganador) return;
 
     const player = players.find(p => p.id === playerId);
     if (player.marcadas.length === 8) { // Verificar si ha marcado todas sus cartas
@@ -160,12 +158,12 @@ function checkWinner(playerId) {
         document.getElementById("status").innerText = `${playerId === "player1" ? "Jugador 1" : playerId === "player2" ? "Jugador 2" : "Jugador 3"} ¡Ganó!`;
         document.getElementById("drawCardBtn").disabled = true;
 
-        // Mostrar el botón de reiniciar juego
+        // Mostrar el botón de reiniciar juego solo cuando exista un ganador
         document.getElementById("resetBtn").style.display = "inline-block";
     }
 }
 
-// Función para reiniciar el juego
+// Función para reiniciar el juego solo aparecera cuando alguien gano
 function resetGame() {
     // Limpiar las cartas de los jugadores
     players.forEach(player => {
@@ -199,13 +197,13 @@ function resetGame() {
 
     // Reactivar el juego
     juegoActivo = true;
-    ganador = null; // Reiniciar la variable del ganador
+    ganador = null; 
 }
 
 // Función para bloquear la interacción con el tablero de los jugadores
 function blockPlayerBoard() {
     const cartasJugador = document.querySelectorAll('.cartas .carta');
     cartasJugador.forEach(carta => {
-        carta.style.pointerEvents = "none"; // Deshabilitar la interacción con las cartas
+        carta.style.pointerEvents = "none";
     });
 }

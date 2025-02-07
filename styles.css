@@ -1,154 +1,159 @@
-/* General reset para evitar problemas de margen/padding */
+/* Esta es la hoja de estilos de la pagina */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto */
 }
 
+/* Estilos base del cuerpo de la página */
 body {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif; 
+    text-align: center; 
+    background-color: #f5f5f5; 
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
+    display: flex; 
+    justify-content: center; 
     align-items: center;
     overflow-x: hidden;
-    margin: 0;
+    margin: 0; 
 }
 
-/* Contenedor del juego */
+/* Contenedor principal del juego */
 .game-container {
-    width: 100%;
-    max-width: 1200px; /* Limitar el ancho máximo para pantallas grandes */
+    width: 100%; 
+    max-width: 1200px; 
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
     overflow-y: auto;
 }
 
-/* Estilos para el título */
+/* Estilos para el título principal */
 h1 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 2em; /* Tamaño más pequeño para móviles */
+    color: #2c3e50; 
+    margin-bottom: 15px; 
+    font-size: 2em;
 }
 
+/* Estilos para el subtítulo */
 h2 {
-    color: #e74c3c;
-    font-size: 1.5em;
+    color: #e74c3c; 
+    font-size: 1.5em; 
 }
 
-/* Estilo de los contenedores de jugadores */
+/* Contenedor de los jugadores */
 #players-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px; /* Más espacio entre los jugadores */
-    flex-wrap: wrap; /* Para que los jugadores se acomoden en pantallas pequeñas */
-    margin-top: 20px; /* Espacio adicional arriba */
+    display: flex; 
+    justify-content: center; 
+    gap: 40px; 
+    flex-wrap: wrap; 
+    margin-top: 20px; 
 }
 
+/* Estilos para cada jugador */
 #player1, #player2, #player3, #player4 {
     width: 100%;
-    max-width: 450px; /* Aumenté el ancho máximo para que quepan las cartas */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px; /* Más espacio entre los jugadores */
-    padding: 15px; /* Espacio interno para evitar que el contenido se pegue a los bordes */
-    background-color: #f9f9f9; /* Fondo claro para distinguir los tableros */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 450px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 30px;
+    padding: 15px; 
+    background-color: #f9f9f9; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilo para las cartas y los jugadores */
+/* Estilos para las cartas de los jugadores */
 .cartas {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    grid-template-rows: repeat(2, 1fr); /* 2 filas */
-    gap: 10px;
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 10px; 
     margin-top: 20px;
-    width: 100%;
+    width: 100%; 
 }
 
-/* Estilo para las cartas */
+/* Estilos para cada carta */
 .carta {
-    width: 100px; /* Ancho fijo de 100px */
-    height: 150px; /* Altura fija de 150px */
-    background-color: #ecf0f1;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100px;
+    height: 150px; 
+    background-color: #ecf0f1; 
+    border-radius: 8px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
-/* Carta marcada */
+/* Estilo para una carta marcada */
 .carta.marcada {
     background-color: #3498db;
     color: white;
-    pointer-events: none; /* Evita que se pueda hacer clic después de marcar */
+    pointer-events: none; 
 }
 
-/* Estilo de los botones */
+/* Estilos para los botones */
 button {
-    padding: 10px 20px;
+    padding: 10px 20px; 
     background-color: #2ecc71;
-    border: none;
-    color: white;
-    font-size: 1em;
+    border: none; 
+    color: white; 
+    font-size: 1em; 
     margin-top: 20px;
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
-    max-width: 200px; /* Limitar el ancho de los botones */
+    max-width: 200px;
 }
 
+/* Estilo para botones deshabilitados */
 button:disabled {
-    background-color: #bdc3c7;
+    background-color: #bdc3c7; 
 }
 
-/* Estilo para la carta sorteada */
+/* Estilos para la sección de la carta sorteada */
 #loteria {
-    margin-top: 20px;
+    margin-top: 20px; 
 }
 
+/* Estilos para la carta sorteada */
 #carta-sorteada {
-    font-size: 1.5em;
-    color: #e74c3c;
+    font-size: 1.5em; 
+    color: #e74c3c; 
 }
 
-/* Estilo para el estado del juego */
+/* Estilos para el estado del juego */
 #game-status {
-    margin-top: 10px;
+    margin-top: 10px; 
 }
 
 /* Estilos para el selector de jugadores */
 #players-selection {
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
 }
 
-/* Media queries para dispositivos móviles */
+/* @media para dispositivos móviles */
 @media (max-width: 768px) {
     h1 {
-        font-size: 1.5em; /* Tamaño más pequeño para móviles */
+        font-size: 1.5em;
     }
 
     .carta {
-        width: 80px; /* Ancho más pequeño para móviles */
-        height: 120px; /* Altura más pequeña para móviles */
-        font-size: 0.9em;
+        width: 80px; 
+        height: 120px; 
+        font-size: 0.9em; 
     }
 
     #players-container {
-        gap: 20px; /* Menos espacio entre jugadores en móviles */
+        gap: 20px; 
     }
 
     #player1, #player2, #player3, #player4 {
-        max-width: 100%; /* Ocupar todo el ancho en móviles */
-        margin-bottom: 20px; /* Menos espacio entre jugadores en móviles */
+        max-width: 100%;
+        margin-bottom: 20px;
     }
 }

@@ -1,159 +1,548 @@
-/* Esta es la hoja de estilos de la pagina */
-* {
+:root {
+    --primary-color: #8d7427;
+    --secondary-color: #f4f4f4;
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Playfair Display', serif;
+}
+
+body {
+    font-family: var(--font-primary);
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto */
+    background-color: var(--secondary-color);
+    color: #333;
 }
 
-/* Estilos base del cuerpo de la página */
-body {
-    font-family: 'Arial', sans-serif; 
-    text-align: center; 
-    background-color: #f5f5f5; 
-    min-height: 100vh;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    overflow-x: hidden;
-    margin: 0; 
-}
-
-/* Contenedor principal del juego */
-.game-container {
-    width: 100%; 
-    max-width: 1200px; 
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    border-radius: 10px; 
-    overflow-y: auto;
-}
-
-/* Estilos para el título principal */
-h1 {
-    color: #2c3e50; 
-    margin-bottom: 15px; 
-    font-size: 2em;
-}
-
-/* Estilos para el subtítulo */
-h2 {
-    color: #e74c3c; 
-    font-size: 1.5em; 
-}
-
-/* Contenedor de los jugadores */
-#players-container {
-    display: flex; 
-    justify-content: center; 
-    gap: 40px; 
-    flex-wrap: wrap; 
-    margin-top: 20px; 
-}
-
-/* Estilos para cada jugador */
-#player1, #player2, #player3, #player4 {
-    width: 100%;
-    max-width: 450px;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    margin-bottom: 30px;
-    padding: 15px; 
-    background-color: #f9f9f9; 
-    border-radius: 10px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-/* Estilos para las cartas de los jugadores */
-.cartas {
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    grid-template-rows: repeat(2, 1fr); 
-    gap: 10px; 
-    margin-top: 20px;
-    width: 100%; 
-}
-
-/* Estilos para cada carta */
-.carta {
-    width: 100px;
-    height: 150px; 
-    background-color: #ecf0f1; 
-    border-radius: 8px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-size: 1em;
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-}
-
-/* Estilo para una carta marcada */
-.carta.marcada {
-    background-color: #3498db;
+header {
+    background-color: var(--primary-color);
     color: white;
-    pointer-events: none; 
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para los botones */
-button {
-    padding: 10px 20px; 
-    background-color: #2ecc71;
-    border: none; 
-    color: white; 
-    font-size: 1em; 
-    margin-top: 20px;
-    cursor: pointer;
-    border-radius: 5px;
+.logo-container {
+    flex: 0 0 auto;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    width: 80px;
+    height: 80px;
+}
+
+.logo-container img {
     width: 100%;
-    max-width: 200px;
+    height: auto;
+    display: block;
 }
 
-/* Estilo para botones deshabilitados */
-button:disabled {
-    background-color: #bdc3c7; 
+header .logo {
+    height: 70px;
+    width: auto;
 }
 
-/* Estilos para la sección de la carta sorteada */
-#loteria {
-    margin-top: 20px; 
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
-/* Estilos para la carta sorteada */
-#carta-sorteada {
-    font-size: 1.5em; 
-    color: #e74c3c; 
+nav ul li {
+    margin: 0 10px;
+    text-align: center;
+    position: relative;
 }
 
-/* Estilos para el estado del juego */
-#game-status {
-    margin-top: 10px; 
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s ease;
 }
 
-/* Estilos para el selector de jugadores */
-#players-selection {
-    margin-bottom: 20px; 
+nav ul li a:hover {
+    color: var(--secondary-color);
 }
 
-/* @media para dispositivos móviles */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.5em;
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu li {
+    margin: 5px 0;
+}
+
+.dropdown-menu a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.header-image {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: transform 0.5s ease;
+}
+
+.header-image:hover img {
+    transform: scale(1.1);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(141, 116, 39, 0.5);
+    z-index: 2;
+}
+
+.header-text {
+    position: relative;
+    z-index: 3;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 2s ease-in-out;
+}
+
+.header-text h1 {
+    font-size: 36px;
+    font-family: var(--font-secondary);
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    font-size: 18px;
+    font-family: var(--font-primary);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
-
-    .carta {
-        width: 80px; 
-        height: 120px; 
-        font-size: 0.9em; 
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    #players-container {
-        gap: 20px; 
-    }
+.container {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+}
 
-    #player1, #player2, #player3, #player4 {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
+.line {
+    width: 90%;
+    height: 3px;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 110%;
+    left: 5%;
+    z-index: 1;
+}
+
+.title-box {
+    display: inline-block;
+    background-color: var(--primary-color);
+    padding: 10px 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    bottom: -8px;
+}
+
+.gallery {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.carousel {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(141, 116, 39, 0.8);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.carousel-indicators {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+    background-color: var(--primary-color);
+}
+
+.gallery-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.gallery-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.presentacion {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.presentacion-imagen {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.presentacion-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.presentacion-texto {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.presentacion-texto h2 {
+    font-size: 28px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.presentacion-texto p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.contador {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+.contador-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.contador-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.contador-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contador-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.contador-numero {
+    font-size: 36px;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.contador-item:hover .contador-numero {
+    color: #6b5a1f;
+}
+
+.contador-item p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.4;
+    margin: 0;
+    flex-grow: 1;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.footer-section {
+    margin: 10px 20px;
+    text-align: left;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.map-container {
+    margin-top: 10px;
+}
+
+.map-container iframe {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    border: none;
+    border-radius: 10px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 10px;
+    font-size: 12px;
+    color: #f4f4f4;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.social-icons a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.siguenos-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+/* Pagina Tejido Social y Alianzas */
+.section-alliances:first-of-type {
+    margin-top: 70px; /* Aumentar el margen superior */
+}
+
+.section-title-text {
+    color: #890116;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Estilos para la sección de Alianzas y Tejido Social */
+.section-alliances {
+    margin-top: 70px; /* Aumentar el margen superior */
+    padding: 20px;
+}
+
+.section-title-text {
+    color: #890116;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Estilos para la cuadrícula de imágenes (2 filas x 7 columnas) */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas */
+    grid-template-rows: repeat(2, auto); /* 2 filas */
+    gap: 20px; /* Espacio entre las imágenes */
+    margin-top: 20px;
+}
+
+.image-item {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.image-item:hover {
+    transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+}
+
+.grid-image {
+    width: 100%; /* Las imágenes se adaptan al tamaño del espacio */
+    height: auto;
+    border-radius: 10px;
+}
+
+.image-name {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Estilos para los enlaces de imágenes */
+.image-link {
+    text-decoration: none; /* Eliminar subrayado del enlace */
+    color: inherit; /* Heredar el color del texto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar contenido horizontalmente */
+    justify-content: center; /* Centrar contenido verticalmente */
+    width: 100%; /* Ocupar todo el ancho del recuadro */
+    height: 100%; /* Ocupar toda la altura del recuadro */
 }

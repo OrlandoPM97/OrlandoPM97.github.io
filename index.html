@@ -1,41 +1,292 @@
-<!--HTML5 (<!DOCTYPE html>) con el idioma establecido en español (lang="es").-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotería Mexicana</title>
-    <!--Enlaza a la hoja de estilos de CSS-->
+    <title>TECALCO</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="game-container"> <!--Contenedor dentro de la paguina web del juego-->
-        <h1>Lotería Mexicana Jarabes San Pedro</h1>
-        <!-- Selector de cantidad de jugadores -->
-        <div id="players-selection">
-            <select id="num-players" onchange="updatePlayerNames()">
-                <option value="" selected disabled>Selecciona el número de jugadores</option>
-                <option value="2">2 Jugadores</option>
-                <option value="3">3 Jugadores</option>
-                <option value="4">4 Jugadores</option>
-            </select>
+    <!-- Header: Contiene el logotipo y el menú de navegación -->
+    <header>
+        <div class="logo-container">
+            <img src="images/index/logo.png" alt="TECALCO Logo" class="logo">
         </div>
-        <div id="players-container">
-            <!-- Los jugadores se crearán dinámicamente aquí -->
-        </div>
-        <div id="loteria">
-            <h3>Carta Sorteada</h3>
-            <div id="carta-sorteada"></div>
-        </div>
-        <div id="game-status">
-            <p id="status"></p>
-        </div>
-        <div id="buttons-container">
-            <button id="startBtn" onclick="startGame()" disabled>Iniciar Juego</button>
-            <button id="drawCardBtn" onclick="drawCard()" disabled>Sorteo de Carta</button>
-            <button id="resetBtn" onclick="resetGame()" style="display:none;">Reiniciar Juego</button>
+        <nav>
+            <ul>
+                <li>
+                    <img src="/images/index/logohome.png" alt="Ícono Inicio" class="menu-icon">
+                    <a href="index.html">Inicio</a>
+                </li>
+                <li class="dropdown">
+                    <img src="/images/index/iconitoconocenos.png" alt="Ícono ¿Quiénes somos?" class="menu-icon">
+                    <a href="quienessomos.html">¿Quiénes somos?</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html#opcion2">Conósenos</a></li>
+                        <li><a href="quienessomos.html#opcion2">Comunidad</a></li>
+                        <li><a href="quienessomos.html#opcion3">La casa</a></li>
+                        <li><a href="quienessomos.html#opcion4">Alianzas</a></li>
+                        <li><a href="quienessomos.html#opcion5">Trayectoria</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <img src="/images/index/iconopatrimoniocult.png" alt="Ícono Patrimonio Cultural" class="menu-icon">
+                    <a href="patrimoniocultural.html">Patrimonio Cultural</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patrimoniocultural.html">Arqueología</a></li>
+                        <li><a href="patrimoniocultural.html">Arquitectura de piedra seca</a></li>
+                        <li><a href="patrimoniocultural.html">Apuntes de arquitectura actual</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <img src="/images/index/iconofomentoalidioma.png" alt="Ícono Fomento a la lengua" class="menu-icon">
+                    <a href="fomentoalalengua.html">Fomento a la lengua</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="fomentoalalengua.html">Toponimia</a></li>
+                        <li><a href="fomentoalalengua.html">Fomento a la lengua y cultura náhuatl</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <img src="/images/index/iconoblog.png" alt="Ícono Iniciativa Cultural" class="menu-icon">
+                    <a href="iniciativacultural.html">Iniciativa Cultural</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="iniciativacultural.html">Libro club</a></li>
+                        <li><a href="iniciativacultural.html">Interculturalidad indígena</a></li>
+                        <li><a href="iniciativacultural.html">Cocina indígena</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <img src="/images/index/iconoresidenciasart.png" alt="Ícono Publicaciones" class="menu-icon">
+                    <a href="publicaciones.html">Publicaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="publicaciones.html">Calendarios</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <img src="/images/index/puzzle.png" alt="Ícono Juego Interactivo" class="menu-icon">
+                    <a href="#juego">Juego interactivo</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Imagen de cabecera con texto superpuesto -->
+    <div class="header-image">
+        <div class="image-overlay"></div>
+        <img src="/images/index/inicioFooter.jpg" alt="TECALCO Imagen" class="header-img">
+        <div class="header-text">
+            <h1>Bienvenidos a Calpulli Tecalco A.C.</h1>
+            <p>Preservando el patrimonio biocultural de las comunidades indígenas</p>
         </div>
     </div>
-    <script src="script.js"></script> <!--Enlaza a la hoja de la logica del juego->
+    
+    <!-- Sección de Presentación -->
+    <section class="presentacion">
+        <div class="presentacion-texto">
+            <h2>Calpulli Tecalco A.C.</h2>
+            <p>
+                Calpulli Tecalco es una organización transdisciplinar que trabaja en la investigación y preservación del patrimonio biocultural de las culturas indígenas. Reúne y conjuga saberes de tradición oral, científicos, sociales, tecnológicos y artísticos con personas, comunidades e instituciones interesadas en el trabajo comunitario, las culturas indígenas y el medio ambiente.
+            </p>
+            <div class="btn-container">
+                <button class="gallery-btn">Más sobre Presentación</button>
+            </div>
+        </div>
+        <div class="presentacion-imagen">
+            <img src="/images/index/cont1.jpg" alt="Imagen de Presentación">
+        </div>
+    </section>
+
+    <!-- Sección de Galería Deslizable -->
+    <div class="container">
+        <div class="line"></div>
+        <div class="title-box">Galería</div>
+    </div>
+
+    <section class="gallery">
+        <div class="carousel">
+            <button class="prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
+            <div class="carousel-track">
+                <div class="slide"><img src="/images/galeria/imagen1.jpg" alt="Imagen 1"></div>
+                <div class="slide"><img src="/images/galeria/imagen2.jpg" alt="Imagen 2"></div>
+                <div class="slide"><img src="/images/galeria/imagen3.jpg" alt="Imagen 3"></div>
+            </div>
+            <button class="next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
+        </div>
+        <button class="gallery-btn">Nuestra galería</button>
+    </section>
+
+    <!-- Sección de Contador Animado -->
+    <div class="container">
+        <div class="line"></div>
+        <div class="title-box">Alcance comunitario</div>
+    </div>
+    <section class="contador">
+        <div class="contador-content">
+            <div class="contador-item">
+                <img src="images/iconos/icono-usuario.png" alt="Icono Beneficiarios" class="contador-icon">
+                <h3 class="contador-numero" data-target="21000">0</h3>
+                <p>Aprovechamiento Beneficiarios indirectos</p>
+            </div>
+            <div class="contador-item">
+                <img src="images/iconos/icono-escuela.png" alt="Icono Escuelas" class="contador-icon">
+                <h3 class="contador-numero" data-target="9">0</h3>
+                <p>Escuelas</p>
+            </div>
+            <div class="contador-item">
+                <img src="images/iconos/icono-colaboracion.png" alt="Icono Colaboraciones" class="contador-icon">
+                <h3 class="contador-numero" data-target="95">0</h3>
+                <p>Colaboraciones con organizaciones culturales, empresariales y clubes deportivos</p>
+            </div>
+            <div class="contador-item">
+                <img src="images/iconos/icono-ambiente.png" alt="Icono Ambiente" class="contador-icon">
+                <h3 class="contador-numero" data-target="8">0</h3>
+                <p>Programas ambientales</p>
+            </div>
+            <div class="contador-item">
+                <img src="images/iconos/icono-iniciativas.png" alt="Icono Residuos" class="contador-icon">
+                <h3 class="contador-numero" data-target="52">0</h3>
+                <p>Iniciativas de recolección de residuos sólidos y saneamiento de parajes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Alianzas y Tejido Social -->
+    <div class="container">
+        <div class="line"></div>
+        <div class="title-box">Alianzas y tejido social</div>
+    </div>
+
+    <section class="section-alliances">
+        <div class="image-grid">
+            <div class="image-item">
+                <a href="https://calpullitecalco.com.mx/" target="_blank" class="image-link">
+                    <img src="images\index\alianzas\Logo-Tecalco.png" alt="Alianza 1" class="grid-image">
+                    <p class="image-name">Calpulli Tecalco</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://jarabesanpedro.com/" target="_blank" class="image-link">
+                    <img src="images\index\alianzas\Logo-Jarabes.jpg" alt="Alianza 2" class="grid-image">
+                    <p class="image-name">Jarabes San Pedro</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://www.facebook.com/TextilesArtesanalesMilpaAlta/" target="_blank" class="image-link">
+                    <img src="images\index\alianzas\Logo-ArteTextil.png" alt="Alianza 3" class="grid-image">
+                    <p class="image-name">Arte Textil Milpa Alta</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://www.facebook.com/MoleChio/" target="_blank" class="image-link">
+                    <img src="images/index/alianzas/Logo-MoleChio.png" alt="Alianza 4" class="grid-image">
+                    <p class="image-name">Mole Chio</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://www.facebook.com/HagamosPoderAC/" target="_blank" class="image-link">
+                    <img src="images/index/alianzas/Logo-HagamosPoder.jpeg" alt="Alianza 5" class="grid-image">
+                    <p class="image-name">Hagamos Poder</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://www.fecyvcom.org/grupo-cultural-contraviento-ac" target="_blank" class="image-link">
+                    <img src="images/index/alianzas/Logo-Contraviento.png" alt="Alianza 6" class="grid-image">
+                    <p class="image-name">Contraviento A.C</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://www.tecnm.mx/" target="_blank" class="image-link">
+                    <img src="images/index/alianzas/Logo-TecNM.png" alt="Alianza 7" class="grid-image">
+                    <p class="image-name">Tecnologico Nacional de Mexico</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://liec.com.mx/" target="_blank" class="image-link">
+                    <img src="images/index/alianzas/Logo-LIEC.png" alt="Alianza 8" class="grid-image">
+                    <p class="image-name">LIEC S.A. de C.V.</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="https://www.facebook.com/haciendacarmenCDMX/" target="_blank" class="image-link">
+                    <img src="images/index/alianzas/Logo-HaciendaCarmen.png" alt="Alianza 9" class="grid-image">
+                    <p class="image-name">Hacienda Carmen</p>
+                </a>
+            </div>
+            <div class="image-item">
+                <img src="images/index/alianzas/Logo-LibroClub.png" alt="Alianza 10" class="grid-image">
+                <p class="image-name">Libro Club “Fernando Benitez”</p>
+            </div>
+            <div class="image-item">
+                <img src="images/index/alianzas/Logo-TecMA.png" alt="Alianza 11" class="grid-image">
+                <p class="image-name">Instituto Tecnologico de Milpa Alta</p>
+            </div>
+            <div class="image-item">
+                <img src="images/index/alianzas/Logo-TecMAII.png" alt="Alianza 12" class="grid-image">
+                <p class="image-name">Instituto Tecnologico de Milpa Alta II</p>
+            </div>
+            <div class="image-item">
+                <img src="images/index/alianzas/Logo-Guardianes.png" alt="Alianza 13" class="grid-image">
+                <p class="image-name">Milpixqueh</p>
+            </div>
+            <div class="image-item">
+                <img src="images/index/alianzas/Logo-UACM.png" alt="Alianza 14" class="grid-image">
+                <p class="image-name">Universidad Autonoma de la Ciudad de Mexico</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: Información de contacto, redes sociales y mapa -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Calpulli Tecalco A.C.</h3>
+                <p>Moctezuma 10, Tula, Milpa Alta,</p>
+                <p>12200 San Pedro Atocpan, CDMX.</p>
+            </div>
+            <div class="footer-section">
+                <p>Teléfonos:</p>
+                <p>(55) 5844 3083</p>
+                <p>(55) 5844 3022</p>
+                <p>Ext: 114</p>
+            </div>
+            <div class="footer-section">
+                <p>Correo:</p>
+                <p>calpullitecalcoac@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="siguenos-title">Síguenos</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com/tu-pagina-de-facebook" target="_blank" aria-label="Facebook">
+                        <img src="/images/iconos/facebook.png" alt="Facebook" class="social-icon">
+                    </a>
+                    <a href="https://instagram.com/tu-pagina-de-instagram" target="_blank" aria-label="Instagram">
+                        <img src="/images/iconos/instagram.png" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="https://youtube.com/tu-canal-de-youtube" target="_blank" aria-label="YouTube">
+                        <img src="/images/iconos/youtube.png" alt="YouTube" class="social-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Ubicación</h3>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.258292982123!2d-99.12345678901234!3d19.234567890123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDE0JzA0LjQiTiA5OcKwMDcnMDkuMiJX!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx"
+                        width="300"
+                        height="200"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Calpulli Tecalco A.C. - Todos los Derechos Reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
